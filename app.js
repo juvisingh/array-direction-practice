@@ -14,17 +14,17 @@ for (i = 0; i < direcArray.length; i ++) {
 let count = 0;
 for (i = 0; i <direcArray.length; i++) {
     if (direcArray[i] == 'w') {
-        count += 1
+        count -= 1
     }
     else if (direcArray[i] == 'e') {
-        count -= 1
+        count += 1
     }
 }
 if (count > 0) {
-    console.log('Start moving in the west direction. The train is ' + count + ' stations west')
+    console.log('Start moving in the east direction. The train is ' + count + ' stations east.')
 }
 else if (count < 0) {
-    console.log('Starting moving in the east direction. The train is ' + (count * -1) + ' stations east')
+    console.log('Starting moving in the west direction. The train is ' + (count * -1) + ' stations west.')
 }
 else {
     console.log('The train is at the origin.')
@@ -36,16 +36,44 @@ for (i = 0; i <direcArray.length; i++) {
     if (direcArray[i] == 'e') {
         countEast += 1
     }
+    if (direcArray[i] =='w') {
+        if (countEast == 0) {
+            continue;
+        }
+        else {
+            countEast -= 1
+        }
+    }
 }
 console.log('The train is ' + countEast + " stations east.")
 
 //Scenario 3
 let nonDupArray = direcArray
-for (let i = 0; i < direcArray.length - 1; i++) {
-    for (let j = i + 1; j < direcArray.length; j++) {
-    if (direcArray[i] === direcArray[j]) {
-          delete direcArray[i]
-       }
+let finalArray = []
+for (let i = 0; i < nonDupArray.length; i++) {
+    if (nonDupArray[i] === nonDupArray[i + 1]) {
+        finalArray.push(nonDupArray[i])
+        i++
+    } 
+    else {
+        finalArray.push(nonDupArray[i])
     }
 }
-console.log(direcArray)
+let count1 = 0;
+for (i = 0; i <finalArray.length; i++) {
+    if (finalArray[i] == 'w') {
+        count1 -= 1
+    }
+    else if (finalArray[i] == 'e') {
+        count1 += 1
+    }
+}
+if (count1 > 0) {
+    console.log('The train is ' + count1 + ' stations east.')
+}
+else if (count1 < 0) {
+    console.log('The train is ' + (count1 * -1) + ' stations west.')
+}
+else {
+    console.log('The train is at the origin.')
+}
